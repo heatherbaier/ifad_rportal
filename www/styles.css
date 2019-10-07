@@ -1,0 +1,79 @@
+/*text*/
+h1, h2, h3, h4, h5 {
+    font-family: 'Roboto Light', sans-serif;
+}
+
+
+
+.tabbable > .nav > li[class=active] > a {
+           color: #003870;
+}
+
+
+.tabbable > .nav > li > a  {
+  color: #003870;
+}
+
+
+/*active tab
+.tabbable > .nav > li[class=active] > a {
+           background-color: #A6ABBD;
+           color: #FFF;
+}
+
+
+.tabbable > .nav > li > a  {
+  background-color: #ffffff;  
+  color: #727787;
+  width: 215px;
+  height: 60px;
+  text-align: center;
+  border-color: #D3D3D3;
+  vertical-align: middle;
+}
+*/
+
+/*calculate PDF button*/
+#downloadReport, #downloadppt, #downloadword, #downloadclimatedata, 
+#downloadclimatecsv, #downloadclimateshp, #downloadprojectstatsshp,
+#downloadData, #draw_downloadReport, #drawproject_report{
+  border: 2px solid #727787; 
+  border-radius: 5px; 
+  background-color: #ffffff; 
+  padding: 20px;
+}
+
+/*calculate Project Zonal Stats button*/
+#calc_project_zonestats {
+  border: 2px solid #727787; 
+  border-radius: 5px; 
+  background-color: #ffffff; 
+  padding: 10px;
+  width: 480px;
+}
+
+#download_error {
+  color: #000000;
+  font-size: 17px;
+}
+
+hr {
+  color: #727787;
+}
+
+.navbar { 
+  font-family: 'Roboto Light', sans-serif;
+}
+
+.mg-histogram .mg-bar rect {
+    fill: #7392b1;
+    shape-rendering: auto;
+}
+
+.mg-histogram .mg-bar rect.active {
+    fill: #003870;
+}
+
+absolutePanel {
+  background-color: #7392b1;
+}

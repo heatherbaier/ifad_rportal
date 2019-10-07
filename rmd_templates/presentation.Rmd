@@ -1,0 +1,173 @@
+---
+output: powerpoint_presentation
+---
+
+```{r, echo=FALSE}
+params <- list()
+params$set_title <- paste(indicator_key(), "Climate Presentation")
+```
+
+---
+title: `r params$set_title`
+date: "`r Sys.Date()`"
+---
+
+
+## Rainfall Plot
+
+```{r, echo = FALSE, warning=FALSE}
+
+rainfall_data <- rainfall_csv[rainfall_csv$adm0_name == indicator_key(),]
+
+ggplot(data=rainfall_data, aes(x = year, y = mean)) +
+  geom_line(aes(color = "#003870")) +
+  xlab("Year") + 
+  ylab("Annual Mean Values") +
+  scale_y_continuous(limits = c(min(rainfall_data$mean), max(rainfall_data$mean))) +
+  theme_classic() +
+  geom_smooth(method = "lm", se=FALSE, size=0.4, aes(color = "red")) +
+  scale_color_identity(name = " ",
+                       breaks = c("#003870", "red"),
+                       labels = c("Mean", "Trend"),
+                       guide = "legend")
+```          
+
+## Rainfall Map
+
+```{r, echo = FALSE, warning=FALSE}
+
+shp <- subset(country_boundaries, adm0_name %in% c(indicator_key()))
+shp <- sf:::as_Spatial(shp)
+raster <- crop(precip_data1, extent(shp))
+
+plot(raster, axes = FALSE, box = FALSE)
+plot(shp, add=TRUE, axes = FALSE, box = FALSE)
+
+```    
+
+## Rainfall Data Information
+
+About the data:
+Rainfall data derived from the CHIRPS (Climate Hazard Group InfraRed Precipitation with Station data) depicts rainfall estimates from 1981- 2018 at a spatial resolution of about 5-km. Dataset merges satellite imagery with in-situ station data to create gridded rainfall time-series for trend analysis and seasonal drought monitoring. This dataset was produced with the methodological support provided the IFAD-WFP Climate Analysis Partnership. 
+Source of the dataset: Climate Hazard Group of California, Santa Barbara.
+
+## NDVI Plot
+
+```{r, echo = FALSE, warning=FALSE}
+
+ndvi_data <- ndvi_csv[ndvi_csv$adm0_name == indicator_key(),]
+
+ggplot(data=ndvi_data, aes(x = year, y = mean)) +
+  geom_line(aes(color = "#003870")) +
+  xlab("Year") + 
+  ylab("NDVI") +
+  scale_y_continuous(limits = c(min(ndvi_data$mean), max(ndvi_data$mean))) +
+  theme_classic() +
+  geom_smooth(method = "lm", se=FALSE, size=0.4, aes(color = "red")) +
+  scale_color_identity(name = " ",
+                       breaks = c("#003870", "red"),
+                       labels = c("Time Series", "Trend"),
+                       guide = "legend")
+
+```
+
+
+## NDVI Map
+
+```{r, echo=FALSE, warning=FALSE}
+
+shp <- subset(country_boundaries, adm0_name %in% c(indicator_key()))
+shp <- sf:::as_Spatial(shp)
+raster <- crop(ndvi_tif, extent(shp))
+
+plot(raster, axes = FALSE, box = FALSE)
+plot(shp, add=TRUE, axes = FALSE, box = FALSE)
+
+```
+
+## NDVI Data Informtation
+
+About the data:
+Rainfall data derived from the CHIRPS (Climate Hazard Group InfraRed Precipitation with Station data) depicts rainfall estimates from 1981- 2018 at a spatial resolution of about 5-km. Dataset merges satellite imagery with in-situ station data to create gridded rainfall time-series for trend analysis and seasonal drought monitoring. This dataset was produced with the methodological support provided the IFAD-WFP Climate Analysis Partnership.
+
+
+## Annual Minimum Temperature Plot
+
+```{r, echo = FALSE, warning=FALSE}
+
+mintemp_data <- mintemp_csv[mintemp_csv$adm0_name == indicator_key(),]
+
+ggplot(data=mintemp_data, aes(x=year, y=mean_min)) +
+  geom_line(aes(color = "#003870")) +
+  xlab("Year") + 
+  ylab("Temp (°C)") +
+  scale_y_continuous(limits = c(min(mintemp_data$mean_min), max(mintemp_data$mean_min))) +
+  theme_classic() +
+  geom_smooth(method = "lm", se=FALSE, size=0.4, aes(color = "red")) +
+  scale_color_identity(name = " ",
+                       breaks = c("#003870", "red"),
+                       labels = c("Minimum Temperature", "Trend Line"),
+                       guide = "legend")
+
+```
+
+## Annual Minimum Temperature Map
+
+```{r, echo = FALSE, warning=FALSE}
+
+    shp <- subset(country_boundaries, adm0_name %in% c(indicator_key()))
+    shp <- sf:::as_Spatial(shp)
+    raster <- crop(mintemp_tif, extent(shp))
+
+    plot(raster, axes = FALSE, box = FALSE)
+    plot(shp, add=TRUE, axes = FALSE, box = FALSE)
+    
+```  
+
+## Annual Minimum Temperature Data Information
+
+About the data:
+Vegetation Index (NDVI) data reflect both amount and health of vegetation. 
+In areas of low rainfall where water is the limiting factor for vegetation growth, 
+seasonal NDVI is closely linked to rainfall; this relationship gets progressively 
+weaker as seasonal rainfall increases and factors other than water availability 
+assume greater importance in controlling vegetation development. The NDVI data in 
+use is from the NASA MODIS platforms Terra, which provide global coverage since 2001 
+(Terra) at about 1Km resolution with a temporal frequency of 16 day periods. Methodological support provided the IFAD-WFP Climate Analysis Partnership Time period: 2001-2018.
+
+
+```{r, echo = FALSE, warning=FALSE}
+
+maxtemp_data <- maxtemp_csv[maxtemp_csv$adm0_name == indicator_key(),]
+
+ggplot(data=maxtemp_data, aes(x = year, y = mean_max)) +
+  geom_line(aes(color = "#003870")) +
+  xlab("Year") + 
+  ylab("Temp (°C)") +
+  scale_y_continuous(limits = c(min(maxtemp_data$mean_max), max(maxtemp_data$mean_max))) +
+  theme_classic() +
+  geom_smooth(method = "lm", se=FALSE, size=0.4, aes(color = "red")) +
+  scale_color_identity(name = " ",
+                       breaks = c("#003870", "red"),
+                       labels = c("Maximum Temperature", "Trend Line"),
+                       guide = "legend")
+
+```
+
+## Annual Maximum Temperature Map
+
+```{r, echo = FALSE, warning=FALSE}
+
+    shp <- subset(country_boundaries, adm0_name %in% c(indicator_key()))
+    shp <- sf:::as_Spatial(shp)
+    raster <- crop(maxtemp_tif, extent(shp))
+
+    plot(raster, axes = FALSE, box = FALSE)
+    plot(shp, add=TRUE, axes = FALSE, box = FALSE)
+    
+``` 
+
+## Annual Maximum Temperature Data Information
+
+About the data:
+Global mean min temperature data is based on the TerraClimate dataset of monthly climate for global terrestrial surfaces from 1958- 2017 at a spatial resolution of about 5-km. This data set was produced with the methodological support provided the IFAD-WFP Climate Analysis Partnership. Mean minimum temperature (°C) can be defined as the average daily minimum air temperature, for each month and as an annual statistic, calculated for each of the years of interest. Source of data: University of Idaho

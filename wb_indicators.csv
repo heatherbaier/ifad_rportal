@@ -1,0 +1,22 @@
+﻿Indicator,Key
+GDP per capita growth (annual %),NY.GDP.PCAP.KD.ZG
+GDP per capita (current US$) ,NY.GDP.PCAP.CD
+"Population, total ",SP.POP.TOTL
+Population growth (annual %) ,SP.POP.GROW
+Rural population (% of total population),SP.RUR.TOTL.ZS
+Rural population,SP.RUR.TOTL
+"Population, female (% of total) ",SP.POP.TOTL.FE.IN
+WB_agriculture_land_percentage_of_land_2000_2014,
+Employment in agriculture (% of total employment) ,
+"Agriculture, value added (% of GDP) ",
+Arable land (hectares per person),
+Land under cereal production (hectares) ,
+Cereal yield (kg per hectare) ,
+"Employment in agriculture, female (% of female employment)",
+"Life expectancy at birth, total (years)",
+"School enrolment, primary (gross), gender parity index (GPI)",
+"Progression to secondary school, male (%)",
+"Maternal mortality ratio (modelled estimate, per 100,000 live births)",
+"Literacy rate, youth female (% of females ages 15-24) ",
+"Mortality rate, under-5 (per 1,000 live births) ",
+"School enrolment, primary and secondary (gross), gender parity index (GPI)",

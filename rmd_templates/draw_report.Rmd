@@ -1,0 +1,56 @@
+---
+header-includes: 
+- \usepackage{xcolor}
+- \usepackage{sectsty} \sectionfont{\centering}
+geometry: margin = 1in
+output: pdf_document
+---
+
+```{r, echo=FALSE}
+params <- list()
+params$set_title <- paste("Project Design")
+```
+
+---
+title: `r params$set_title`
+date: "`r Sys.Date()`"
+---
+
+
+
+# Current Ongoing Projects
+
+```{r, echo=FALSE, fig.align="default", warning=FALSE, fig.show = "hold", out.width = "50%"}
+
+# New Project Boundaries Map 
+
+ongoing_pattern <- paste("WHERE display_name = '", drawreport_country(), "';", sep = '')
+
+ongoing_projects <- rpostgis::pgGetGeom(con, "view_ifad_project_polygons_ongoing",
+                                        geom = "the_geom",
+                                        clause = (ongoing_pattern))
+
+country_pattern <- paste("WHERE adm0_name = '", drawreport_country(), "';", sep = '')
+
+country_boundaries <- rpostgis::pgGetGeom(con, "ifad_gaul_level_0_2017",
+                                          geom = "the_geom",
+                                          clause = (country_pattern))
+
+ggplot() +
+  geom_polygon(data = country_boundaries, aes(long, lat, group = group), fill = "grey") +
+  geom_polygon(data = ongoing_projects, aes(long, lat, group = group), fill = "blue", colour = "black",
+               size = .6) +
+  ggtitle("Current & Ongoing Projects") +
+  theme_void()
+
+# Current/Ongoing Projects Map
+
+ggplot() +
+  geom_polygon(data = country_boundaries, aes(long, lat, group = group), fill = "grey") +
+  geom_polygon(data = draw_final_polygons(), aes(long, lat, group = group), fill = "blue", colour = "black",
+               size = .6) +
+  ggtitle("New Project Boundaries") +
+  theme_void()
+
+````
+
