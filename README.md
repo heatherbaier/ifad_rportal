@@ -1,5 +1,5 @@
 # IFAD R Portal
-Data visualization and suitability modeling platform for IFAD
+Data visualization and suitability modeling platform
 
 ## File Structure:
 
